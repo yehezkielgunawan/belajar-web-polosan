@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Gacha App</title>
+    <style>
+      body {
+        font-family: sans-serif;
+      }
+
+      input {
+        width: 320px;
+        padding: 10px;
+        border: 1px solid black;
+      }
+
+      button {
+        width: 100px;
+        background-color: #000;
+        color: #fff;
+        padding: 10px;
+        border: none;
+        cursor: pointer;
+        margin-top: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Simple Gacha App</h1>
+    <input type="text" id="input" placeholder="Enter a string" /> <br />
+    <button id="submit">Submit</button>
+    <button id="gacha">Gacha</button>
+    <button id="reset">Reset</button>
+    <p id="strings"></p>
+    <p id="picked"></p>
+    <script>
+      const input = document.getElementById("input");
+      const submit = document.getElementById("submit");
+      const gacha = document.getElementById("gacha");
+      const picked = document.getElementById("picked");
+      const strings = document.getElementById("strings");
+      const reset = document.getElementById("reset");
+
+      let array = [];
+
+      submit.onclick = function () {
+        const string = input.value;
+        if (string === array.find((item) => item === string)) {
+          alert("Item already exists!");
+        } else {
+          array.push(string);
+          strings.innerHTML = array.join(", ");
+          input.value = "";
+        }
+      };
+
+      gacha.onclick = function () {
+        const randomIndex = Math.floor(Math.random() * array.length);
+        picked.innerHTML = "Picked item: " + `<b>${array[randomIndex]}</b>`;
+      };
+
+      reset.onclick = function () {
+        array = [];
+        strings.innerHTML = "";
+        alert("Reset successful!");
+      };
+    </script>
+  </body>
+</html>
